@@ -17,6 +17,9 @@ const Dashboard = () => {
   const [showQRScanner, setShowQRScanner] = useState(false);
   const [currentSessions, setCurrentSessions] = useState([]);
   const [showMobileNav, setShowMobileNav] = useState(false);
+  // New states for manual QR input
+  const [showManualInput, setShowManualInput] = useState(false); // to show manual input
+  const [manualURL, setManualURL] = useState(""); // store the input URL
   const navigate = useNavigate();
 
   function handleCurrentSessionScan(sessionData) {
@@ -83,41 +86,36 @@ const Dashboard = () => {
     };
   }
 
-  function handleQRScan(scannedData) {
+  // Updated handleQRScan to show manual input on failure
+  const handleQRScan = (scannedData) => {
+    let sessionId = null;
+    let teacherEmail = null;
     try {
-      // Parse the scanned QR data - expecting format: session_id=xxx&email=xxx
+      // Try to parse as URL
       const url = new URL(scannedData);
-      const sessionId = url.searchParams.get("session_id");
-      const teacherEmail = url.searchParams.get("email");
-      
-      if (sessionId && teacherEmail) {
-        localStorage.setItem("session_id", sessionId);
-        localStorage.setItem("teacher_email", teacherEmail);
-        setShowQRScanner(false);
-        toggleStudentForm("open");
-      } else {
-        alert("Invalid QR code. Please scan a valid attendance QR code.");
-      }
-    } catch (error) {
-      // Try alternative parsing for different QR format
+      sessionId = url.searchParams.get("session_id");
+      teacherEmail = url.searchParams.get("email");
+    } catch (e) {
+      // If not a valid URL, try to parse as query string
       if (scannedData.includes("session_id") && scannedData.includes("email")) {
         const params = new URLSearchParams(scannedData.split('?')[1] || scannedData);
-        const sessionId = params.get("session_id");
-        const teacherEmail = params.get("email");
-        
-        if (sessionId && teacherEmail) {
-          localStorage.setItem("session_id", sessionId);
-          localStorage.setItem("teacher_email", teacherEmail);
-          setShowQRScanner(false);
-          toggleStudentForm("open");
-        } else {
-          alert("Invalid QR code format.");
-        }
-      } else {
-        alert("Invalid QR code. Please scan a valid attendance QR code.");
+        sessionId = params.get("session_id");
+        teacherEmail = params.get("email");
       }
     }
-  }
+    if (sessionId && teacherEmail) {
+      localStorage.setItem("session_id", sessionId);
+      localStorage.setItem("teacher_email", teacherEmail);
+      setShowQRScanner(false);       // close the QR scanner
+      setShowManualInput(false);     // hide manual input if open
+      toggleStudentForm("open");    // open the student form
+    } else {
+      // If QR scan fails, show error and do not proceed
+      setShowQRScanner(false);
+      setShowManualInput(false);
+      window.alert("Invalid QR code. Please try again or enter the URL manually.");
+    }
+  };
 
   useEffect(() => {
     if (token === "" || token === undefined) {
@@ -330,7 +328,39 @@ const Dashboard = () => {
         onScan={handleQRScan}
         onClose={() => setShowQRScanner(false)}
       />
-      
+
+      {/* Manual URL Input for QR fallback */}
+      {showManualInput && (
+        <div className="manual-url-input" style={{ margin: '20px 0', textAlign: 'center' }}>
+          <h3>Enter QR Code URL Manually</h3>
+          <input
+            type="text"
+            placeholder="Paste QR code URL here"
+            value={manualURL}
+            onChange={(e) => setManualURL(e.target.value)}
+            style={{ width: '80%', padding: '8px', marginRight: '8px' }}
+          />
+          <button
+            onClick={() => {
+              if (manualURL.trim() !== "") {
+                handleQRScan(manualURL.trim()); // use same QR scan logic
+              }
+            }}
+          >
+            Submit
+          </button>
+          <button
+            onClick={() => {
+              setShowManualInput(false);
+              setManualURL("");
+            }}
+            style={{ marginLeft: '8px' }}
+          >
+            Cancel
+          </button>
+        </div>
+      )}
+
       {/* Student Form */}
       {isSessionDisplay && (
         <div className="popup-overlay">
