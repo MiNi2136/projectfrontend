@@ -1,0 +1,409 @@
+/* Teacher Reports Data Sheet Styles */
+.reports-container {
+  padding: 2rem;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.reports-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.reports-header h1 {
+  margin: 0 0 0.5rem 0;
+  color: #2c3e50;
+  font-size: 1.8em;
+  font-weight: 600;
+}
+
+.reports-header p {
+  margin: 0;
+  color: #6c757d;
+  font-size: 1rem;
+}
+
+/* Summary Statistics */
+.summary-stats {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: #7eaddc;
+  border-radius: 12px;
+  border: 1px solid #e9ecef;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-number {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #0f1011;
+  margin-bottom: 0.25rem;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.9rem;
+  color: #0f1010;
+  font-weight: 500;
+}
+
+/* Controls */
+.reports-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  gap: 1rem;
+}
+
+.filters {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.search-input, .course-filter {
+  padding: 0.75rem 1rem;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  background: white;
+}
+
+.search-input {
+  min-width: 250px;
+}
+
+.course-filter {
+  min-width: 150px;
+}
+
+.export-btn {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.export-btn:hover:not(:disabled) {
+  background: #0056b3;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,123,255,0.3);
+}
+
+.export-btn:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Data Sheet Table */
+.datasheet-container {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #e9ecef;
+  box-shadow: 0 4px 15px rgba(223, 218, 218, 0.08);
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.reports-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  background: white;
+}
+
+.reports-table thead {
+  background: white !important;
+}
+
+.reports-table th {
+  padding: 1rem 0.75rem;
+  text-align: left;
+  font-weight: 600;
+  color: black !important;
+  background-color: white !important;
+  border-bottom: 2px solid #dee2e6;
+  border-right: 1px solid #e9ecef;
+}
+
+.reports-table th:last-child {
+  border-right: none;
+}
+
+.reports-table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid #f1f3f4;
+  border-right: 1px solid #f1f3f4;
+  vertical-align: middle;
+}
+
+.reports-table td:last-child {
+  border-right: none;
+}
+
+.reports-table tbody tr:hover {
+  background: #f8f9fa;
+}
+
+/* Row styling based on attendance status */
+.present-row {
+  background:whitesmoke;
+}
+
+.late-row {
+  background: whitesmoke;
+}
+
+/* Cell specific styling */
+.course-cell {
+  font-weight: 600;
+  color: #007bff;
+}
+
+.student-name-cell {
+  font-weight: 500;
+  color: #2c3e50;
+}
+
+.regno-cell {
+  font-family: 'Courier New', monospace;
+  color: #6c757d;
+}
+
+.email-cell {
+  font-size: 0.85rem;
+  color: #6c757d;
+}
+
+/* Status badges */
+.status-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-align: center;
+  display: inline-block;
+  min-width: 70px;
+}
+
+.status-badge.present {
+  background: rgba(40, 167, 69, 0.1);
+  color: #28a745;
+}
+
+.status-badge.late {
+  background: rgba(255, 193, 7, 0.1);
+  color: #ffc107;
+}
+
+/* CT Marks Cell */
+.ct-marks-cell {
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+  min-width: 120px;
+}
+
+.ct-marks-cell:hover {
+  background-color: rgba(0, 123, 255, 0.05);
+}
+
+.ct-edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 140px;
+}
+
+.ct-input {
+  padding: 0.5rem;
+  border: 1px solid #007bff;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  outline: none;
+}
+
+.ct-input:focus {
+  border-color: #0056b3;
+  box-shadow: 0 0 0 2px rgba(0,123,255,0.25);
+}
+
+.ct-buttons {
+  display: flex;
+  gap: 0.25rem;
+  justify-content: center;
+}
+
+.ct-save-btn, .ct-cancel-btn {
+  padding: 0.3rem 0.6rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.ct-save-btn {
+  background: #28a745;
+  color: white;
+}
+
+.ct-save-btn:hover {
+  background: #218838;
+}
+
+.ct-cancel-btn {
+  background: #dc3545;
+  color: white;
+}
+
+.ct-cancel-btn:hover {
+  background: #c82333;
+}
+
+.ct-marks-display {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.ct-mark-item {
+  background: rgba(0, 123, 255, 0.1);
+  color: #007bff;
+  padding: 0.2rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.add-ct-marks {
+  color: #6c757d;
+  font-style: italic;
+  font-size: 0.85rem;
+  padding: 0.25rem;
+}
+
+.add-ct-marks:hover {
+  color: #007bff;
+}
+
+/* Loading spinner */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4rem 2rem;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #007bff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-container p {
+  color: #6c757d;
+  font-size: 1rem;
+}
+
+/* No data message */
+.no-data-message {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.no-data-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+
+.no-data-message h3 {
+  margin: 0 0 0.5rem 0;
+  color: #495057;
+  font-size: 1.3rem;
+}
+
+.no-data-message p {
+  margin: 0;
+  color: #6c757d;
+  font-size: 1rem;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .reports-container {
+    padding: 1rem;
+  }
+  
+  .summary-stats {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .reports-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .filters {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .search-input, .course-filter {
+    min-width: auto;
+    width: 100%;
+  }
+  
+  .table-container {
+    font-size: 0.8rem;
+  }
+  
+  .reports-table th,
+  .reports-table td {
+    padding: 0.5rem 0.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .reports-table {
+    font-size: 0.75rem;
+  }
+  
+  .summary-stats {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .stat-item {
+    padding: 0.5rem;
+  }
+}
